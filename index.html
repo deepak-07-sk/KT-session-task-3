@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 15px;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Student Management System</h1>
+
+<div class="form-container">
+    <input type="text" id="id" placeholder="Student ID">
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="roll" placeholder="Roll Number">
+    <input type="number" id="age" placeholder="Age">
+    <button onclick="addStudent()">Add Student</button>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="studentTable">
+    </tbody>
+</table>
+
+<script>
+    function addStudent() {
+        const id = document.getElementById("id").value;
+        const name = document.getElementById("name").value;
+        const roll = document.getElementById("roll").value;
+        const age = document.getElementById("age").value;
+
+
+        if (!id || !name || !roll || !age) {
+            alert("Please fill all fields");
+            return;
+        }
+
+        const table = document.getElementById("studentTable");
+        const row = table.insertRow();
+
+        row.innerHTML = `
+            <td>${id}</td>
+            <td>${name}</td>
+            <td>${roll}</td>
+            <td>${age}</td>
+            <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+        `;
+
+        // Clear inputs
+        document.getElementById("id").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("roll").value = "";
+        document.getElementById("age").value = "";
+    }
+
+    function deleteRow(button) {
+        const row = button.parentElement.parentElement;
+        row.remove();
+    }
+</script>
+
+</body>
+</html>
